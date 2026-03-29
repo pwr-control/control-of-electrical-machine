@@ -48,7 +48,7 @@ LFi = 230e-6;
 LFi_0 = 20e-6;
 RLFi = 5e-3;
 %[text] ### Settings for speed control or wind application
-use_torque_curve = 1; % for wind application
+use_torque_curve = 0; % for wind application
 use_speed_control = 1-use_torque_curve; %
 use_mtpa = 1; %
 use_psm_encoder = 0; % 
@@ -587,16 +587,16 @@ Simulink.importExternalCTypes(model,'Names',{'dqpll_grid_output_t'});
 Simulink.importExternalCTypes(model,'Names',{'rpi_output_t'});
 
 %[text] ## Remove Scopes Opening Automatically
-% open_scopes = find_system(model, 'BlockType', 'Scope');
-% for i = 1:length(open_scopes)
-%     set_param(open_scopes{i}, 'Open', 'off');
-% end
+open_scopes = find_system(model, 'BlockType', 'Scope');
+for i = 1:length(open_scopes)
+    set_param(open_scopes{i}, 'Open', 'off');
+end
 
-% shh = get(0,'ShowHiddenHandles');
-% set(0,'ShowHiddenHandles','On');
-% hscope = findobj(0,'Type','Figure','Tag','SIMULINK_SIMSCOPE_FIGURE');
-% close(hscope);
-% set(0,'ShowHiddenHandles',shh);
+shh = get(0,'ShowHiddenHandles');
+set(0,'ShowHiddenHandles','On');
+hscope = findobj(0,'Type','Figure','Tag','SIMULINK_SIMSCOPE_FIGURE');
+close(hscope);
+set(0,'ShowHiddenHandles',shh);
 
 %[text] ## 
 
